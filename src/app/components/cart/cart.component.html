@@ -1,0 +1,27 @@
+<div class="container">
+  <div class="row g-0">
+    <div class="col-5 offset-1">
+      <div *ngFor="let item of cartProducts" class="cart-container mt-5" >
+        <img [src]="item.producturl" />
+        <div class="cart-panel mt-3">
+          <h5>{{item.productname}}</h5>
+          <h5>$ {{item.productprice}}</h5>
+          <h5> Amount : <span class="price-card">{{item.amount}}</span></h5>
+        </div>
+      </div>
+      <h2 *ngIf="total" class="p-2">Total :$ {{total}}</h2>
+    </div>
+    <div class="col-5 offset-1 mt-5">
+      <form #userInfo="ngForm" (ngSubmit)="doCheckOut(userInfo.value)">
+        <label>Full name:</label>
+        <input class="form-control" type="text" name="userfullname" placeholder="(minimum 3 characters)" ngModel/>
+        <label>Address:</label>
+        <input class="form-control" type="text" name="useraddress" placeholder="(minimum 6 characters)" ngModel/>
+        <label>Credit Card number:</label>
+        <input class="form-control" type="number" name="usercreditcardnumber" placeholder="(16-digit number)" ngModel/>
+        <small class="form-text text-muted">We'll never share your payment details with anyone else.</small><br/>
+        <button class="btn btn-primary" type="submit">submit</button>
+      </form>
+    </div>
+  </div>
+</div>

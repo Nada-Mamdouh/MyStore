@@ -1,0 +1,24 @@
+*{
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+}
+.header {
+    text-align: center;
+    background: #33B5E5;
+    color: #fff;
+    padding: 12px;
+  }
+
+  a {
+    color: #ffffff;
+  }
+  .cart-items-number{
+    display:inline-block;
+    width: 20px;
+    height: 20px;
+    border: 1px solid rgb(218, 18, 18);
+    border-radius: 50%;
+    background: rgb(218, 18, 18);
+    position: relative;
+    top: -10px;
+    left: -10px;
+  }

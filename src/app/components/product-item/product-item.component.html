@@ -1,0 +1,16 @@
+<form (ngSubmit)="addtocart(productDetails.value)" #productDetails="ngForm">
+  <div class="product-container">
+    <img [src]="productItem.url" class="product-image" routerLink="/product-item-detail/{{productItem.id}}">
+    <input type="hidden" name="producturl" [(ngModel)]="productItem.url"/>
+    <h6>{{productItem.name}}</h6>
+    <input type="hidden" name="productname" [(ngModel)]="productItem.name"/>
+    <p>$ {{productItem.price}}</p>
+    <input type="hidden" name="productprice" [(ngModel)]="productItem.price"/>
+    <select class="select-input" name="amount" ngModel>
+      <option *ngFor="let itemcount of itemsCount" [value] = "itemcount"> {{itemcount}}</option>
+    </select>
+    <button type="submit" class="btn btn-primary">Add to cart</button>
+  </div>
+</form>
+
+

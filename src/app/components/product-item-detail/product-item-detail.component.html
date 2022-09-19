@@ -1,0 +1,23 @@
+<form (ngSubmit)="addtocart(productDetails.value)" #productDetails="ngForm">
+  <div class="detail-container">
+    <img [src]="productDetail.url">
+    <input type="hidden" name="producturl" [(ngModel)]="productDetail.url"/>
+    <div class="detail-item">
+      <h2>{{this.productDetail.name}}</h2>
+      <input type="hidden" name="productname" [(ngModel)]="productDetail.name"/>
+      <p>$ {{this.productDetail.price}}</p>
+      <input type="hidden" name="productprice" [(ngModel)]="productDetail.price"/>
+      <p>Carry things around town!</p>
+      <br/>
+      <select class="select-input" name="amount" ngModel>
+        <option *ngFor="let itemcount of itemsCount" [value] = "itemcount"> {{itemcount}}</option>
+      </select>
+      <br/>
+      <button type="submit" class="btn btn-primary">Add to cart</button>
+      <br/>
+      <div class="back-link">
+        <a routerLink="/"><fa-icon [icon]="arrowIcon"></fa-icon> Back to Product list</a>
+      </div>
+    </div>
+  </div>
+</form>
