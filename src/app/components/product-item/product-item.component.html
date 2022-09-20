@@ -6,7 +6,7 @@
     <input type="hidden" name="productname" [(ngModel)]="productItem.name"/>
     <p>$ {{productItem.price}}</p>
     <input type="hidden" name="productprice" [(ngModel)]="productItem.price"/>
-    <select class="select-input" name="amount" ngModel>
+    <select class="select-input" name="amount" ngModel (ngModelChange)="onChange($event)">
       <option *ngFor="let itemcount of itemsCount" [value] = "itemcount"> {{itemcount}}</option>
     </select>
     <button type="submit" class="btn btn-primary">Add to cart</button>

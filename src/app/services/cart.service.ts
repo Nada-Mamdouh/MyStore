@@ -14,12 +14,12 @@ export class CartService {
   _cartItemsCount = new BehaviorSubject<number>(this.countOfItemsInCart);
   _cartItemsCount$ = this._cartItemsCount.asObservable();
 
-
   constructor() { }
   addToCart(prod: ProductInCartDetails):ProductInCartDetails[]{
     this.cartProducts.push(prod);
     //console.log(this.cartProducts);
     this.setCartItemsCount(this.calculateCountOfItemsInCart());
+    alert(`product ${prod.productname} added to cart!`);
     return this.cartProducts;
   }
   getCartItems():ProductInCartDetails[]{
@@ -28,7 +28,17 @@ export class CartService {
   clearCartItems():void{
     this.cartProducts = [];
   }
+  removeFromCart(prod: ProductInCartDetails):ProductInCartDetails[]{
+    const index = this.cartProducts.indexOf(prod);
+    if(index > -1){
+      this.cartProducts.splice(index, 1);
+    }
+    this.setCartItemsCount(this.calculateCountOfItemsInCart());
+    alert(`product ${prod.productname} removed from cart!`);
+    return this.cartProducts;
+  }
   getTotal():number{
+    this.total = 0;
     for(let i=0;i<this.cartProducts.length;i++){
       this.total += (this.cartProducts[i].productprice * this.cartProducts[i].amount);
     }

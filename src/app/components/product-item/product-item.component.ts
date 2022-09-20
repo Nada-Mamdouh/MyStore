@@ -21,5 +21,8 @@ export class ProductItemComponent implements OnInit {
     this.productToBeAddedToCart = data;
     this.cartSer.addToCart(this.productToBeAddedToCart);
   }
+  onChange(e:any){
+    console.log(e);
+  }
 
 }

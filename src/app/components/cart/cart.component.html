@@ -7,6 +7,7 @@
           <h5>{{item.productname}}</h5>
           <h5>$ {{item.productprice}}</h5>
           <h5> Amount : <span class="price-card">{{item.amount}}</span></h5>
+          <button class="btn btn-danger" style="width:150px;" (click)="removeFromCart(item)">remove from cart</button>
         </div>
       </div>
       <h2 *ngIf="total" class="p-2">Total :$ {{total}}</h2>
@@ -14,13 +15,61 @@
     <div class="col-5 offset-1 mt-5">
       <form #userInfo="ngForm" (ngSubmit)="doCheckOut(userInfo.value)">
         <label>Full name:</label>
-        <input class="form-control" type="text" name="userfullname" placeholder="(minimum 3 characters)" ngModel/>
+        <input  class="form-control"
+                type="text"
+                name="fullname"
+                placeholder="(minimum 3 characters)"
+                [(ngModel)]="checkoutInfo.fullname"
+                required minlength="3"
+                (ngModelChange)="onChange($event)"
+                #userfullname="ngModel"/>
+        <!-- Error messages display -->
+        <div *ngIf="userfullname.invalid&&userfullname.dirty">
+          <div *ngIf="userfullname.errors?.['required']">
+            <span style="color:red">Please provide your fullname</span>
+          </div>
+          <div *ngIf="userfullname.errors?.['minlength']">
+            <span style="color:red">Your fullname needs to be atleast 3 characters length</span>
+          </div>
+        </div>
         <label>Address:</label>
-        <input class="form-control" type="text" name="useraddress" placeholder="(minimum 6 characters)" ngModel/>
+        <input  class="form-control"
+                type="text"
+                name="address"
+                placeholder="(minimum 6 characters)"
+                [(ngModel)]="checkoutInfo.address"
+                required minlength="6"
+                (ngModelChange)="onChange($event)"
+                #useraddress="ngModel"/>
+        <!-- Error messages display -->
+        <div *ngIf="useraddress.invalid&&useraddress.dirty">
+          <div *ngIf="useraddress.errors?.['required']">
+            <span style="color:red">Please provide your address</span>
+          </div>
+          <div *ngIf="useraddress.errors?.['minlength']">
+            <span style="color:red">Your address needs to be atleast 6 characters length</span>
+          </div>
+        </div>
         <label>Credit Card number:</label>
-        <input class="form-control" type="number" name="usercreditcardnumber" placeholder="(16-digit number)" ngModel/>
+        <input  class="form-control"
+                type="text"
+                name="creditcardnumber"
+                placeholder="(16-digit number)"
+                [(ngModel)]="checkoutInfo.creditcardnumber"
+                required minlength="16"
+                (ngModelChange)="onChange($event)"
+                #usercreditcardnumber="ngModel"/>
+        <!-- Error messages display -->
+        <div *ngIf="usercreditcardnumber.invalid&&usercreditcardnumber.dirty">
+          <div *ngIf="usercreditcardnumber.errors?.['required']">
+            <span style="color:red">Please provide your credit card number</span>
+          </div>
+          <div *ngIf="usercreditcardnumber.errors?.['minlength']">
+            <span style="color:red">Your credit card number needs to consist of 16 characters</span>
+          </div>
+        </div>
         <small class="form-text text-muted">We'll never share your payment details with anyone else.</small><br/>
-        <button class="btn btn-primary" type="submit">submit</button>
+        <button class="btn btn-primary" type="submit" [disabled]="userInfo.invalid">submit</button>
       </form>
     </div>
   </div>
