@@ -50,6 +50,7 @@
             <span style="color:red">Your address needs to be atleast 6 characters length</span>
           </div>
         </div>
+
         <label>Credit Card number:</label>
         <input  class="form-control"
                 type="text"
@@ -57,7 +58,7 @@
                 placeholder="(16-digit number)"
                 [(ngModel)]="checkoutInfo.creditcardnumber"
                 required minlength="16"
-                (ngModelChange)="onChange($event)"
+                (keypress)="onKeyPress($event)"
                 #usercreditcardnumber="ngModel"/>
         <!-- Error messages display -->
         <div *ngIf="usercreditcardnumber.invalid&&usercreditcardnumber.dirty">
@@ -65,8 +66,11 @@
             <span style="color:red">Please provide your credit card number</span>
           </div>
           <div *ngIf="usercreditcardnumber.errors?.['minlength']">
-            <span style="color:red">Your credit card number needs to consist of 16 characters</span>
+            <span style="color:red">Your credit card number needs to consist of 16 numbers</span>
           </div>
+        </div>
+        <div *ngIf="!onlyNumbersAllowed">
+          <span style="color:red">Please only numbers allowed in this field</span>
         </div>
         <small class="form-text text-muted">We'll never share your payment details with anyone else.</small><br/>
         <button class="btn btn-primary" type="submit" [disabled]="userInfo.invalid">submit</button>

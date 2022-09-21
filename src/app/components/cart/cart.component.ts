@@ -1,6 +1,5 @@
 import { Component, OnInit, OnChanges, Output, EventEmitter } from '@angular/core';
 import { CartService } from 'src/app/services/cart.service';
-import { Product } from 'src/app/_models/product';
 import { ProductInCartDetails } from 'src/app/_models/product-in-cart-details';
 import { Router } from '@angular/router';
 import { CheckOutInfo } from 'src/app/_models/check-out-info';
@@ -15,7 +14,7 @@ export class CartComponent implements OnInit {
   checkoutInfo:CheckOutInfo = new CheckOutInfo();
   total:number=0;
   @Output() countOfItems:EventEmitter<number>=new EventEmitter;
-
+  onlyNumbersAllowed:boolean = true;
   constructor(private router:Router,private cartSer:CartService) { }
 
   ngOnInit(): void {
@@ -35,7 +34,17 @@ export class CartComponent implements OnInit {
 
   }
   onChange(e:any){
-    console.log(`your entered ${e}`);
+    console.log(e);
+  }
+  onKeyPress(event:any) {
+    var charCode = (event.which) ? event.which : event.keyCode;
+    // Only Numbers 0-9
+    if ((charCode < 48 || charCode > 57)) {
+      event.preventDefault();
+      this.onlyNumbersAllowed = false;
+    } else {
+      this.onlyNumbersAllowed = true;
+    }
   }
 
 
